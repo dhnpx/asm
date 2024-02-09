@@ -1,19 +1,24 @@
+// HyungJoo Yoon
+// Tatiana Klimova 
+// Anthony Te
+
 #include <iostream>
 
 using namespace std;
 
-int main() {
-	int numDrinks;
-	char drink;
-	int sandwiches;
-	int sandwichSize;
-	int customers;
-	int total = 0;
-	int three = 3;
-	int five = 5;
-	int two = 2;
-	
+int numDrinks;
+char drink;
+int numSandwiches;
+int sandwichSize;
+int numCustomers;
+int total = 0;
+int tenPrice = 3;
+int twelvePrice = 5;
+int sodaPrice = 2;
+int waterPrice = 1;
 
+
+void readMenu() {
 	cout << "-----------------7-11 Convenient Store ------------------" << endl;
 	cout << "Drinks" << endl;
 	cout << "\tSoda(S).............................................$2" << endl;
@@ -24,20 +29,32 @@ int main() {
 	cout << endl;
 
 	cout << "Enter the number of customers: ";
-	cin >> customers;
+	cin >> numCustomers;
 
-	cout << "\tHow many drinks? ";
+}
+
+void takeOrder() {
+	cout << endl << "\tHow many drinks? ";
 	cin >> numDrinks;
 
-	cout << "\t\tWhat kind of drink (S=Soda, W=Water)?" << endl;
+	cout << "\t\tWhat kind of drink (S=Soda, W=Water)? ";
 	cin >> drink;
 
 	cout << "\t How many Sandwiches? ";
-	cin >> sandwiches;
+	cin >> numSandwiches;
 	cout << "\t\tWhat size of sandwich (10/12 inches)? ";
 	cin >> sandwichSize;
+}
 
+void displayTotal() {
+	cout << "\t\t\tYour total bill = $" << total << endl;
+}
+
+int main() {
 	_asm {
+		call readMenu;
+	L1:
+		call takeOrder;
 		mov eax, numDrinks;
 		cmp drink, 'w';
 		Je water;
@@ -47,11 +64,11 @@ int main() {
 		Je soda;
 		cmp drink, 'S';
 	soda:
-			imul two;
+			imul sodaPrice;
 	water:
 			
 		mov total, eax;
-		mov eax, sandwiches;
+		mov eax, numSandwiches;
 		mov ebx, sandwichSize;
 
 		cmp ebx, 10
@@ -59,13 +76,16 @@ int main() {
 		cmp ebx, 12
 		Je twelve
 	ten:
-		imul three;
+		imul tenPrice;
 		Jmp done;
 	twelve:
-		imul five;
+		imul twelvePrice;
 	done:
-
 		add total, eax;
+		call displayTotal;
+		cmp numCustomers, 0;
+		dec numCustomers;
+		jnz L1;
 	}
-	cout << "\t\t\tYour total bill = $" << total << endl;
+	return 0;
 }

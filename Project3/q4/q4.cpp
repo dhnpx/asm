@@ -1,7 +1,6 @@
-/*
-
-Q4.
-*/
+// HyungJoo Yoon
+// Tatiana Klimova 
+// Anthony Te
 
 #include <iostream>
 
@@ -11,6 +10,10 @@ int main() {
 	short a, b, c, d, e, f;
 	short det, det_x, det_y; //the determinants
 	short x, y;
+
+	cout << "This program solves the system" << endl;
+	cout << "  aX + bY = c" << endl;
+	cout << "  dX + eY = f" << endl;
 
 	cout << "Enter the values of a, b, and c: ";
 	cin >> a >> b >> c;
@@ -63,8 +66,8 @@ int main() {
 
 	}
 
-	cout << " X = " << x << endl;
-	cout << " Y = " << y << endl;
+	cout << "  X = " << x << endl;
+	cout << "  Y = " << y << endl;
 
 	return 0;
 }
