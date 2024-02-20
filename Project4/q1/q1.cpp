@@ -15,22 +15,12 @@ void displayFloppy() {
 }
 
 void displayRAM() {
-	cout << "RAM: ";
-	switch (sizeRam) {
-		case 0:
-			cout << 16;
-		case 1:
-			cout << 32;
-		case 2:
-			cout << 48;
-		case 3:
-			cout << 64;
-	}
-	cout << "GB" << endl;
+	cout << "RAM: " << sizeRam << "GB" << endl;
 }
 
 void Base2() {
-	short x = 1 << 15, t; 
+	short x = 1 << 15;
+	short t;
 	short n = 0b1100111010011100;
 	for (int i = 1; i <= 16; ++i) {
 		t = n & x;
@@ -78,6 +68,8 @@ int main() {
 		mov bx, 0000000000000011b;
 		shr ax, 2;
 		and ax, bx;
+		inc ax;
+		imul ax, 16;
 		mov sizeRam, ax;
 		call displayRAM;
 	}
