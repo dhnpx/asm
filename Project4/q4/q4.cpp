@@ -1,3 +1,7 @@
+// HyungJoo Yoon
+// Tatiana Klimova 
+// Anthony Te
+
 #include <iostream>
 
 using namespace std;
